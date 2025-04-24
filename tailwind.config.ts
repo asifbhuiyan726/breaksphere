@@ -20,8 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Overpass', 'sans-serif'],
-				serif: ['Merriweather', 'serif'],
+				sans: ['Roboto', 'sans-serif'],
+				serif: ['Roboto Serif', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
