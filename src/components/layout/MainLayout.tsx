@@ -1,5 +1,5 @@
 
-import { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import Navbar from "./Navbar";
 
 interface MainLayoutProps {
@@ -21,10 +21,10 @@ const MainLayout = ({ children, onStatusChange }: MainLayoutProps) => {
     <div className="min-h-screen bg-pastel-gray/20">
       <Navbar userStatus={userStatus} onStatusChange={handleStatusChange} />
       <main className="container mx-auto px-4 py-6 md:py-8">
-        {/* Pass the currentStatus to any child that needs it */}
         {React.Children.map(children, child => {
           if (React.isValidElement(child)) {
-            return React.cloneElement(child, { currentStatus: userStatus });
+            // Pass only props that the child component expects
+            return React.cloneElement(child);
           }
           return child;
         })}
