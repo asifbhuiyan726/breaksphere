@@ -1,0 +1,27 @@
+
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import DefaultDashboard from "./DefaultDashboard";
+import BreakDashboard from "./BreakDashboard";
+
+interface DashboardProps {
+  currentStatus: string;
+}
+
+const Dashboard = ({ currentStatus }: DashboardProps) => {
+  // Show different content based on the user's status
+  return (
+    <div className="space-y-8">
+      <h2 className="text-3xl font-bold">Dashboard</h2>
+      
+      {currentStatus === "break" ? (
+        <BreakDashboard />
+      ) : (
+        <DefaultDashboard currentStatus={currentStatus} />
+      )}
+    </div>
+  );
+};
+
+export default Dashboard;
