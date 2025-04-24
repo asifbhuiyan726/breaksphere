@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +9,7 @@ import IcebreakerWidget from "../features/IcebreakerWidget";
 import BreakUsers from "../features/BreakUsers";
 import { Clock, Timer, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import BreakEvents from "../features/BreakEvents";
 
 interface BreakDashboardProps {
   onEndBreak?: () => void;
@@ -45,10 +45,11 @@ const BreakDashboard = ({ onEndBreak }: BreakDashboardProps) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="col-span-1 md:col-span-2">
           <Tabs defaultValue="rooms" className="w-full">
-            <TabsList className="grid grid-cols-3 mb-6">
+            <TabsList className="grid grid-cols-4 mb-6">
               <TabsTrigger value="rooms" className="rounded-full">Interest Rooms</TabsTrigger>
               <TabsTrigger value="buddy" className="rounded-full">Coffee Buddy</TabsTrigger>
               <TabsTrigger value="feed" className="rounded-full">Social Feed</TabsTrigger>
+              <TabsTrigger value="events" className="rounded-full">Events</TabsTrigger>
             </TabsList>
             <TabsContent value="rooms" className="animate-slide-up">
               <InterestRooms />
@@ -58,6 +59,9 @@ const BreakDashboard = ({ onEndBreak }: BreakDashboardProps) => {
             </TabsContent>
             <TabsContent value="feed" className="animate-slide-up">
               <SocialFeed />
+            </TabsContent>
+            <TabsContent value="events" className="animate-slide-up">
+              <BreakEvents />
             </TabsContent>
           </Tabs>
         </div>
