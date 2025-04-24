@@ -80,9 +80,11 @@ const BreakDashboard = ({ onEndBreak }: BreakDashboardProps) => {
               <p className="text-center text-sm text-gray-500 mt-2">minutes remaining</p>
             </CardContent>
           </Card>
+
+          <IcebreakerWidget />
           
           <BreakUsers />
-          <IcebreakerWidget />
+          
         </div>
       </div>
     </div>
