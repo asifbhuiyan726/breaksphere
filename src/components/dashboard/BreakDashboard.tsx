@@ -2,16 +2,46 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import InterestRooms from "../features/InterestRooms";
 import CoffeeBuddy from "../features/CoffeeBuddy";
 import SocialFeed from "../features/SocialFeed";
 import IcebreakerWidget from "../features/IcebreakerWidget";
 import BreakUsers from "../features/BreakUsers";
-import { Clock } from "lucide-react";
+import { Clock, Timer, ArrowLeft } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
-const BreakDashboard = () => {
+interface BreakDashboardProps {
+  onEndBreak?: () => void;
+}
+
+const BreakDashboard = ({ onEndBreak }: BreakDashboardProps) => {
+  const { toast } = useToast();
+
+  const handleEndBreak = () => {
+    if (onEndBreak) {
+      onEndBreak();
+      toast({
+        title: "Break ended",
+        description: "You are now back to work mode.",
+      });
+    }
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-brand-orange">Break Dashboard</h2>
+        <Button 
+          onClick={handleEndBreak} 
+          variant="outline" 
+          className="flex items-center gap-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          End Break
+        </Button>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="col-span-1 md:col-span-2">
           <Tabs defaultValue="rooms" className="w-full">

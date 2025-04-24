@@ -1,14 +1,22 @@
 
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 import Navbar from "./Navbar";
 
 interface MainLayoutProps {
   children: ReactNode;
   onStatusChange?: (status: string) => void;
+  currentStatus?: string;
 }
 
-const MainLayout = ({ children, onStatusChange }: MainLayoutProps) => {
-  const [userStatus, setUserStatus] = useState("available");
+const MainLayout = ({ children, onStatusChange, currentStatus: propStatus }: MainLayoutProps) => {
+  const [userStatus, setUserStatus] = useState(propStatus || "available");
+
+  // Update local state when prop changes
+  useEffect(() => {
+    if (propStatus) {
+      setUserStatus(propStatus);
+    }
+  }, [propStatus]);
 
   const handleStatusChange = (status: string) => {
     setUserStatus(status);
@@ -23,8 +31,7 @@ const MainLayout = ({ children, onStatusChange }: MainLayoutProps) => {
       <main className="container mx-auto px-4 py-6 md:py-8">
         {React.Children.map(children, child => {
           if (React.isValidElement(child)) {
-            // Pass only props that the child component expects
-            return React.cloneElement(child);
+            return child;
           }
           return child;
         })}

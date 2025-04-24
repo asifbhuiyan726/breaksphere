@@ -11,7 +11,7 @@ const Index = () => {
   };
 
   return (
-    <MainLayout onStatusChange={handleStatusChange}>
+    <MainLayout onStatusChange={handleStatusChange} currentStatus={userStatus}>
       <Dashboard currentStatus={userStatus} onStatusChange={handleStatusChange} />
     </MainLayout>
   );
