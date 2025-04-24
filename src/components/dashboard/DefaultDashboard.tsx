@@ -6,16 +6,20 @@ import { useToast } from "@/hooks/use-toast";
 
 interface DefaultDashboardProps {
   currentStatus: string;
+  onStatusChange?: (status: string) => void;
 }
 
-const DefaultDashboard = ({ currentStatus }: DefaultDashboardProps) => {
+const DefaultDashboard = ({ currentStatus, onStatusChange }: DefaultDashboardProps) => {
   const { toast } = useToast();
   
   const handleStartBreak = () => {
-    toast({
-      title: "Break initiated",
-      description: "Your status has been changed to 'On Break'.",
-    });
+    if (onStatusChange) {
+      onStatusChange("break");
+      toast({
+        title: "Break initiated",
+        description: "Your status has been changed to 'On Break'.",
+      });
+    }
   };
 
   return (

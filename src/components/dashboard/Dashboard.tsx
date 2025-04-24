@@ -7,9 +7,10 @@ import BreakDashboard from "./BreakDashboard";
 
 interface DashboardProps {
   currentStatus: string;
+  onStatusChange?: (status: string) => void;
 }
 
-const Dashboard = ({ currentStatus }: DashboardProps) => {
+const Dashboard = ({ currentStatus, onStatusChange }: DashboardProps) => {
   // Show different content based on the user's status
   return (
     <div className="space-y-8">
@@ -18,7 +19,7 @@ const Dashboard = ({ currentStatus }: DashboardProps) => {
       {currentStatus === "break" ? (
         <BreakDashboard />
       ) : (
-        <DefaultDashboard currentStatus={currentStatus} />
+        <DefaultDashboard currentStatus={currentStatus} onStatusChange={onStatusChange} />
       )}
     </div>
   );

@@ -5,13 +5,27 @@ import { Button } from "@/components/ui/button";
 import StatusDropdown from "../status/StatusDropdown";
 import { useToast } from "@/hooks/use-toast";
 
-const Navbar = () => {
+interface NavbarProps {
+  userStatus: string;
+  onStatusChange: (status: string) => void;
+}
+
+const Navbar = ({ userStatus, onStatusChange }: NavbarProps) => {
   const { toast } = useToast();
   const [user, setUser] = useState({
     name: "John Doe",
     avatar: "https://api.dicebear.com/7.x/avatars/svg?seed=John",
-    status: "available"
   });
+
+  const handleStatusChange = (status: string) => {
+    onStatusChange(status);
+    
+    // Update user interface with toast
+    toast({
+      title: "Status updated",
+      description: `Your status is now set to ${status}`,
+    });
+  };
 
   const handleLogout = () => {
     toast({
@@ -33,14 +47,8 @@ const Navbar = () => {
           
           <div className="flex items-center space-x-4">
             <StatusDropdown 
-              currentStatus={user.status} 
-              onStatusChange={(status) => {
-                setUser(prev => ({ ...prev, status }));
-                toast({
-                  title: "Status updated",
-                  description: `Your status is now set to ${status}`,
-                });
-              }} 
+              currentStatus={userStatus} 
+              onStatusChange={handleStatusChange} 
             />
             
             <Button variant="ghost" size="icon" className="relative">
@@ -52,9 +60,9 @@ const Navbar = () => {
               <div className="flex items-center space-x-2">
                 <div className="relative">
                   <div className={`absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-white ${
-                    user.status === "break" ? "bg-green-500" : 
-                    user.status === "lunch" ? "bg-orange-500" : 
-                    user.status === "dnd" ? "bg-red-500" : "bg-blue-500"
+                    userStatus === "break" ? "bg-green-500" : 
+                    userStatus === "lunch" ? "bg-orange-500" : 
+                    userStatus === "dnd" ? "bg-red-500" : "bg-blue-500"
                   }`}></div>
                   <div className="h-10 w-10 rounded-full overflow-hidden ring-2 ring-gray-100">
                     <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
