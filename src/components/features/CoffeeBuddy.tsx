@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Coffee, MessageSquare, Clock } from "lucide-react";
 import { ChatDialog } from "./ChatDialog";
 import { CallDialog } from "./CallDialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const CoffeeBuddy = () => {
   const { toast } = useToast();
@@ -26,7 +27,7 @@ const CoffeeBuddy = () => {
       setRequestStatus('matched');
       setMatch({
         name: "Jane Smith",
-        avatar: "https://api.dicebear.com/7.x/avatars/svg?seed=Jane"
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
       });
       toast({
         title: "Match found!",
@@ -89,9 +90,10 @@ const CoffeeBuddy = () => {
           {requestStatus === 'matched' && match && (
             <div className="text-center py-4 bg-white bg-opacity-70 rounded-lg">
               <div className="flex flex-col items-center">
-                <div className="h-20 w-20 rounded-full overflow-hidden mb-3 ring-4 ring-brand-orange/20">
-                  <img src={match.avatar} alt={match.name} className="h-full w-full object-cover" />
-                </div>
+                <Avatar className="h-20 w-20 mb-3 ring-4 ring-brand-orange/20">
+                  <AvatarImage src={match.avatar} alt={match.name} />
+                  <AvatarFallback>{match.name.substring(0, 2)}</AvatarFallback>
+                </Avatar>
                 <h3 className="font-medium text-lg">{match.name}</h3>
                 <p className="text-sm text-gray-500">Available for a coffee chat</p>
               </div>

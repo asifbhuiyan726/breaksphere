@@ -60,6 +60,7 @@ const InterestRooms = () => {
     if (joinedRooms.includes(roomId)) {
       // Leave the room
       setJoinedRooms(joinedRooms.filter(id => id !== roomId));
+      setActiveChatRoom(null);
       toast({
         title: "Room left",
         description: `You've left the ${roomTitle} room.`
@@ -70,7 +71,7 @@ const InterestRooms = () => {
       setActiveChatRoom(roomTitle);
       toast({
         title: "Room joined",
-        description: `You've joined the ${roomTitle} room.`
+        description: `You've joined the ${roomTitle} room. Chat opened.`
       });
     }
   };

@@ -14,21 +14,21 @@ const usersOnBreak = [
   {
     id: 1,
     name: "Sarah Wilson",
-    avatar: "https://api.dicebear.com/7.x/avatars/svg?seed=Sarah",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
     status: "break",
     duration: "10 mins left"
   },
   {
     id: 2,
     name: "Mike Chen",
-    avatar: "https://api.dicebear.com/7.x/avatars/svg?seed=Mike",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mike",
     status: "break",
     duration: "5 mins left"
   },
   {
     id: 3,
     name: "Emma Davis",
-    avatar: "https://api.dicebear.com/7.x/avatars/svg?seed=Emma",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma",
     status: "break",
     duration: "15 mins left"
   }
