@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,14 +6,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { MessageSquare, Heart, BarChart3 } from "lucide-react";
 
-// Define a proper type for our posts to prevent TypeScript errors
+// Define a proper type for our posts
 type PollOption = {
   id: string;
   text: string;
   votes: number;
 };
 
-type Post = {
+interface BasePost {
   id: number;
   author: {
     name: string;
@@ -24,9 +23,19 @@ type Post = {
   timestamp: string;
   likes: number;
   comments: number;
-  isPoll?: boolean;
-  pollOptions?: PollOption[];
-};
+}
+
+interface RegularPost extends BasePost {
+  isPoll?: false;
+  pollOptions?: never;
+}
+
+interface PollPost extends BasePost {
+  isPoll: true;
+  pollOptions: PollOption[];
+}
+
+type Post = RegularPost | PollPost;
 
 const initialPosts: Post[] = [
   {
@@ -68,7 +77,7 @@ const SocialFeed = () => {
   const handlePostSubmit = () => {
     if (!newPost.trim()) return;
     
-    const post: Post = {
+    const post: RegularPost = {
       id: Date.now(),
       author: {
         name: "John Doe",
