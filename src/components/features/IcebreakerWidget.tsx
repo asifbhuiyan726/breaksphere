@@ -50,7 +50,7 @@ const IcebreakerWidget = () => {
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2">
           <MessageSquare className="h-5 w-5 text-purple-500" />
-          Icebreaker
+          Quick Spark
         </CardTitle>
         <CardDescription>Get to know your colleagues better</CardDescription>
       </CardHeader>
