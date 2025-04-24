@@ -4,11 +4,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Coffee, MessageSquare, Clock } from "lucide-react";
+import { ChatDialog } from "./ChatDialog";
+import { CallDialog } from "./CallDialog";
 
 const CoffeeBuddy = () => {
   const { toast } = useToast();
   const [requestStatus, setRequestStatus] = useState<'idle' | 'searching' | 'matched'>('idle');
   const [match, setMatch] = useState<null | { name: string, avatar: string }>(null);
+  const [showChatDialog, setShowChatDialog] = useState(false);
+  const [showCallDialog, setShowCallDialog] = useState(false);
 
   const handleFindBuddy = () => {
     setRequestStatus('searching');
@@ -34,6 +38,18 @@ const CoffeeBuddy = () => {
   const handleReset = () => {
     setRequestStatus('idle');
     setMatch(null);
+  };
+
+  const handleStartChat = () => {
+    if (match) {
+      setShowChatDialog(true);
+    }
+  };
+
+  const handleScheduleCall = () => {
+    if (match) {
+      setShowCallDialog(true);
+    }
   };
 
   return (
@@ -80,8 +96,12 @@ const CoffeeBuddy = () => {
                 <p className="text-sm text-gray-500">Available for a coffee chat</p>
               </div>
               <div className="mt-5 space-x-3">
-                <Button className="button-hover"><MessageSquare className="h-4 w-4 mr-1" /> Start Chat</Button>
-                <Button variant="outline" className="button-hover"><Clock className="h-4 w-4 mr-1" /> Schedule Call</Button>
+                <Button className="button-hover" onClick={handleStartChat}>
+                  <MessageSquare className="h-4 w-4 mr-1" /> Start Chat
+                </Button>
+                <Button variant="outline" className="button-hover" onClick={handleScheduleCall}>
+                  <Clock className="h-4 w-4 mr-1" /> Schedule Call
+                </Button>
               </div>
             </div>
           )}
@@ -94,6 +114,24 @@ const CoffeeBuddy = () => {
           )}
         </CardFooter>
       </Card>
+
+      {/* Chat and Call Dialogs */}
+      {match && showChatDialog && (
+        <ChatDialog
+          isOpen={showChatDialog}
+          onClose={() => setShowChatDialog(false)}
+          recipient={match.name}
+        />
+      )}
+
+      {match && showCallDialog && (
+        <CallDialog
+          isOpen={showCallDialog}
+          onClose={() => setShowCallDialog(false)}
+          recipient={match.name}
+          recipientAvatar={match.avatar}
+        />
+      )}
     </div>
   );
 };
