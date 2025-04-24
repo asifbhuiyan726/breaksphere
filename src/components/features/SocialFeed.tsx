@@ -6,7 +6,28 @@ import { Avatar } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
-const initialPosts = [
+// Define a proper type for our posts to prevent TypeScript errors
+type PollOption = {
+  id: string;
+  text: string;
+  votes: number;
+};
+
+type Post = {
+  id: number;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  content: string;
+  timestamp: string;
+  likes: number;
+  comments: number;
+  isPoll?: boolean;
+  pollOptions?: PollOption[];
+};
+
+const initialPosts: Post[] = [
   {
     id: 1,
     author: {
@@ -40,13 +61,13 @@ const initialPosts = [
 
 const SocialFeed = () => {
   const { toast } = useToast();
-  const [posts, setPosts] = useState(initialPosts);
+  const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [newPost, setNewPost] = useState("");
   
   const handlePostSubmit = () => {
     if (!newPost.trim()) return;
     
-    const post = {
+    const post: Post = {
       id: Date.now(),
       author: {
         name: "John Doe",
@@ -74,7 +95,7 @@ const SocialFeed = () => {
   
   const handleVote = (postId: number, optionId: string) => {
     setPosts(posts.map(post => {
-      if (post.id === postId && post.isPoll) {
+      if (post.id === postId && post.isPoll && post.pollOptions) {
         return {
           ...post,
           pollOptions: post.pollOptions.map(option => 
