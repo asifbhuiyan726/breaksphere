@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { User, Bell, LogOut } from "lucide-react";
+import { User, Bell, LogOut, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatusDropdown from "../status/StatusDropdown";
 import { useToast } from "@/hooks/use-toast";
@@ -21,12 +21,13 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-      <div className="container mx-auto px-4 py-4">
+    <header className="bg-white border-b border-gray-100 sticky top-0 z-30 shadow-sm">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <h1 className="text-2xl font-bold text-primary">
-              Break<span className="text-orange-500">Sphere</span>
+            <h1 className="text-2xl font-bold">
+              <span className="text-primary">Break</span>
+              <span className="text-brand-orange">Sphere</span>
             </h1>
           </div>
           
@@ -42,26 +43,27 @@ const Navbar = () => {
               }} 
             />
             
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
+              <span className="absolute top-0 right-0 w-2 h-2 bg-brand-orange rounded-full"></span>
             </Button>
             
             <div className="flex items-center space-x-3">
               <div className="flex items-center space-x-2">
                 <div className="relative">
-                  <div className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white ${
+                  <div className={`absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-white ${
                     user.status === "break" ? "bg-green-500" : 
                     user.status === "lunch" ? "bg-orange-500" : 
                     user.status === "dnd" ? "bg-red-500" : "bg-blue-500"
                   }`}></div>
-                  <div className="h-9 w-9 rounded-full overflow-hidden">
+                  <div className="h-10 w-10 rounded-full overflow-hidden ring-2 ring-gray-100">
                     <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
                   </div>
                 </div>
                 <span className="text-sm font-medium hidden sm:inline">{user.name}</span>
               </div>
               
-              <Button variant="ghost" size="icon" onClick={handleLogout}>
+              <Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700" onClick={handleLogout}>
                 <LogOut className="h-5 w-5" />
               </Button>
             </div>

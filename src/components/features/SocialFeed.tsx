@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { MessageSquare, Heart, BarChart3 } from "lucide-react";
 
 // Define a proper type for our posts to prevent TypeScript errors
 type PollOption = {
@@ -113,38 +114,41 @@ const SocialFeed = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <Card>
-        <CardHeader className="pb-2">
+    <div className="space-y-5">
+      <Card className="pastel-card overflow-hidden border-pastel-blue bg-white">
+        <CardHeader className="pb-2 border-b border-gray-100">
           <div className="flex items-center space-x-2">
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-9 w-9 ring-2 ring-pastel-blue/30">
               <img src="https://api.dicebear.com/7.x/avatars/svg?seed=John" alt="Your avatar" />
             </Avatar>
-            <span className="font-medium">Share something...</span>
+            <span className="font-medium text-gray-700">Share something...</span>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           <Textarea 
             placeholder="What's on your mind?" 
             value={newPost}
             onChange={(e) => setNewPost(e.target.value)}
-            className="resize-none"
+            className="resize-none border-pastel-blue/30 focus:border-pastel-blue"
           />
         </CardContent>
-        <CardFooter className="justify-between">
+        <CardFooter className="justify-between border-t border-gray-100 bg-gray-50/50">
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm">Add Poll</Button>
+            <Button variant="outline" size="sm" className="text-xs flex items-center gap-1">
+              <BarChart3 className="h-3.5 w-3.5" />
+              Add Poll
+            </Button>
           </div>
-          <Button size="sm" onClick={handlePostSubmit}>Post</Button>
+          <Button size="sm" className="button-hover" onClick={handlePostSubmit}>Post</Button>
         </CardFooter>
       </Card>
       
       {posts.map((post) => (
-        <Card key={post.id} className="overflow-hidden">
-          <CardHeader className="pb-2">
-            <div className="flex items-center space-x-2">
-              <Avatar className="h-8 w-8">
-                <img src={post.author.avatar} alt={post.author.name} />
+        <Card key={post.id} className="pastel-card card-hover overflow-hidden border-gray-200 bg-white">
+          <CardHeader className="pb-3 border-b border-gray-100">
+            <div className="flex items-center space-x-3">
+              <Avatar className="h-10 w-10">
+                <img src={post.author.avatar} alt={post.author.name} className="rounded-full" />
               </Avatar>
               <div>
                 <p className="font-medium">{post.author.name}</p>
@@ -152,24 +156,24 @@ const SocialFeed = () => {
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <p className="whitespace-pre-line">{post.content}</p>
+          <CardContent className="py-4">
+            <p className="whitespace-pre-line font-serif text-gray-700">{post.content}</p>
             
             {post.isPoll && post.pollOptions && (
-              <div className="mt-4 space-y-2">
+              <div className="mt-5 space-y-3">
                 {post.pollOptions.map((option) => (
                   <div key={option.id} className="flex flex-col">
                     <Button 
                       variant="outline" 
-                      className="justify-between"
+                      className="justify-between hover:bg-pastel-blue/20 transition-all"
                       onClick={() => handleVote(post.id, option.id)}
                     >
-                      <span>{option.id}. {option.text}</span>
+                      <span className="font-medium">{option.id}. {option.text}</span>
                       <span className="text-xs text-gray-500">{option.votes} votes</span>
                     </Button>
-                    <div className="h-1 mt-1 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-1.5 mt-1 bg-gray-100 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-primary"
+                        className="h-full bg-primary transition-all duration-700"
                         style={{ width: `${(option.votes / post.pollOptions.reduce((acc, curr) => acc + curr.votes, 0)) * 100}%` }}
                       ></div>
                     </div>
@@ -178,13 +182,15 @@ const SocialFeed = () => {
               </div>
             )}
           </CardContent>
-          <CardFooter className="border-t pt-4">
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="sm" onClick={() => handleLike(post.id)}>
-                Like ({post.likes})
+          <CardFooter className="border-t border-gray-100 py-2 bg-gray-50/50">
+            <div className="flex space-x-4 w-full">
+              <Button variant="ghost" size="sm" className="flex gap-1.5 text-gray-600 hover:text-brand-orange" onClick={() => handleLike(post.id)}>
+                <Heart className="h-4 w-4" />
+                <span>{post.likes}</span>
               </Button>
-              <Button variant="ghost" size="sm">
-                Comment ({post.comments})
+              <Button variant="ghost" size="sm" className="flex gap-1.5 text-gray-600">
+                <MessageSquare className="h-4 w-4" />
+                <span>{post.comments}</span>
               </Button>
             </div>
           </CardFooter>

@@ -28,23 +28,23 @@ const StatusDropdown = ({ currentStatus, onStatusChange }: StatusDropdownProps) 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
-          <StatusIcon className={`h-4 w-4 ${currentStatusOption.color}`} />
-          <span>{currentStatusOption.label}</span>
+        <Button variant="outline" className="flex items-center gap-2 border-gray-200 hover:bg-gray-50">
+          <StatusIcon className={`h-3.5 w-3.5 ${currentStatusOption.color}`} />
+          <span className="text-sm font-medium">{currentStatusOption.label}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
+      <DropdownMenuContent align="end" className="w-48 rounded-xl border-gray-100 shadow-md">
         {statusOptions.map((option) => {
           const Icon = option.icon;
           return (
             <DropdownMenuItem
               key={option.value}
-              className={`flex items-center gap-2 ${
-                currentStatus === option.value ? "bg-accent" : ""
-              }`}
+              className={`flex items-center gap-2 rounded-lg my-0.5 text-sm ${
+                currentStatus === option.value ? "bg-gray-100" : ""
+              } hover:bg-gray-50 cursor-pointer`}
               onClick={() => onStatusChange(option.value)}
             >
-              <Icon className={`h-4 w-4 ${option.color}`} />
+              <Icon className={`h-3.5 w-3.5 ${option.color}`} />
               <span>{option.label}</span>
             </DropdownMenuItem>
           );
