@@ -43,7 +43,7 @@ const BreakUsers = () => {
     <>
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">People on Break</CardTitle>
+          <CardTitle className="text-xl font-semibold">Who's Chilling?</CardTitle>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-[300px] pr-4">
