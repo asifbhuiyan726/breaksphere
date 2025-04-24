@@ -1,12 +1,12 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import InterestRooms from "../features/InterestRooms";
 import CoffeeBuddy from "../features/CoffeeBuddy";
 import SocialFeed from "../features/SocialFeed";
 import IcebreakerWidget from "../features/IcebreakerWidget";
+import BreakUsers from "../features/BreakUsers";
 import { Clock } from "lucide-react";
 
 const BreakDashboard = () => {
@@ -47,6 +47,7 @@ const BreakDashboard = () => {
             </CardContent>
           </Card>
           
+          <BreakUsers />
           <IcebreakerWidget />
         </div>
       </div>
