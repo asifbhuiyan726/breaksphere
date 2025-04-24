@@ -20,7 +20,7 @@ const Dashboard = ({ currentStatus, onStatusChange }: DashboardProps) => {
   // Show different content based on the user's status
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-bold">Dashboard</h2>
+      <h2 className="text-3xl font-bold">Welcome! </h2>
       
       {currentStatus === "break" ? (
         <BreakDashboard onEndBreak={handleEndBreak} />
