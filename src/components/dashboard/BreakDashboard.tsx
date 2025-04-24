@@ -46,10 +46,10 @@ const BreakDashboard = ({ onEndBreak }: BreakDashboardProps) => {
         <div className="col-span-1 md:col-span-2">
           <Tabs defaultValue="rooms" className="w-full">
             <TabsList className="grid grid-cols-4 mb-6">
-              <TabsTrigger value="rooms" className="rounded-full">Interest Rooms</TabsTrigger>
-              <TabsTrigger value="buddy" className="rounded-full">Coffee Buddy</TabsTrigger>
-              <TabsTrigger value="feed" className="rounded-full">Social Feed</TabsTrigger>
-              <TabsTrigger value="events" className="rounded-full">Events</TabsTrigger>
+              <TabsTrigger value="rooms" className="rounded-full">Vibe Spaces</TabsTrigger>
+              <TabsTrigger value="buddy" className="rounded-full">Coffee Connect</TabsTrigger>
+              <TabsTrigger value="feed" className="rounded-full">Chatter Stream</TabsTrigger>
+              <TabsTrigger value="events" className="rounded-full">The Happenings</TabsTrigger>
             </TabsList>
             <TabsContent value="rooms" className="animate-slide-up">
               <InterestRooms />
