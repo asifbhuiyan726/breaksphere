@@ -1,9 +1,10 @@
 
 import { useState } from "react";
-import { User, Bell, LogOut, Menu } from "lucide-react";
+import { User, Bell, LogOut, Menu, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatusDropdown from "../status/StatusDropdown";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
   userStatus: string;
@@ -50,6 +51,12 @@ const Navbar = ({ userStatus, onStatusChange }: NavbarProps) => {
               currentStatus={userStatus} 
               onStatusChange={handleStatusChange} 
             />
+            
+            <Link to="/docs">
+              <Button variant="ghost" size="icon" title="Documentation">
+                <FileText className="h-5 w-5" />
+              </Button>
+            </Link>
             
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
